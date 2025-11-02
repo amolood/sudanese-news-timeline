@@ -89,4 +89,4 @@ Notes:
 ---
 
 ## License
-For demo/educational use. Add your preferred license (e.g., MIT) if you plan to redistribute.
+MIT
