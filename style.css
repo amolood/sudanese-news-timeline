@@ -151,6 +151,10 @@ header h1 {
     font-style: italic;
 }
 
+.source .sep { margin: 0 6px; color: #94a3b8; }
+.source a { color: #0ea5e9; text-decoration: none; }
+.source a:hover { text-decoration: underline; }
+
 /* سحابة الكلمات المفتاحية */
 .keyword-cloud {
     max-width: 900px;

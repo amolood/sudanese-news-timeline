@@ -126,6 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             const frag = document.createDocumentFragment();
             events.forEach(event => {
+                const linkHtml = event.link ? `<span class="sep">·</span><a href="${event.link}" target="_blank" rel="noopener noreferrer">رابط</a>` : '';
                 const item = document.createElement('div');
                 item.className = 'timeline-item';
                 item.innerHTML = `
@@ -133,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <h3>${event.title || ''}</h3>
                         <span class="date-location">${event.date || ''} | ${event.location || ''}</span>
                         <p>${event.summary || ''}</p>
-                        <small class="source">المصدر: ${event.source || ''}</small>
+                        <small class="source">المصدر: ${event.source || ''} ${linkHtml}</small>
                     </div>
                 `;
                 frag.appendChild(item);
@@ -254,7 +255,12 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!Array.isArray(data)) throw new Error('صيغة البيانات غير صحيحة: المتوقع مصفوفة أحداث.');
 
             data.sort((a, b) => new Date(a.date) - new Date(b.date));
-            allEvents = data;
+
+            // تأكيد وجود الخاصية link لكل حدث
+            allEvents = data.map(e => ({
+                ...e,
+                link: e.link ?? ''
+            }));
 
             // تجهيز رموز الكلمات لكل حدث لمطابقة سريعة لاحقًا
             for (const e of allEvents) ensureEventTokens(e);
